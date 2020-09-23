@@ -17,7 +17,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/profile',[PostController::class,'index']);
+Route::get('/profile',function(){
+    return redirect('/profile/'. auth()->user()->name);
+})->middleware(['auth:sanctum', 'verified']);
+
+
+Route::get('/profile/{username}',[PostController::class,'getByUsername'])->middleware(['auth:sanctum', 'verified']);
+Route::post('/profile',[PostController::class,'store'])->middleware(['auth:sanctum', 'verified']);
+
+
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
