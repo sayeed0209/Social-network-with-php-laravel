@@ -14,10 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+//si la session esta activa te hace un redirect a home si no lo esta te enseña la vista de welcome
 Route::get('/', function () {
-    return view('welcome');
+    if(Auth::check()) {
+        return redirect('/home');
+    } else {
+        return view('welcome');
+    }
 });
 Route::get('/profile',[PostController::class,'index']);
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/home', function () {
+    return view('layouts.home');
+})->name('home');
+
+

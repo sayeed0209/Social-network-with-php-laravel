@@ -1,0 +1,89 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+.body-welcome{
+        background-image: url('https://elfinanciero.com.mx/graficos/gif/Face-logo.gif');
+        width: 100%;
+        background-size: cover;
+        background-position: center;
+        // height: 722px;
+    }
+
+
+
+
+.body-login{
+    margin:0;
+    // background-color: red;
+    height: 100vh;
+    max-width: 100%;
+    .login-container{
+        display: flex;
+        flex-direction: row;
+        .login-left{
+            width: 60%;
+            background-image: url('https://i.pinimg.com/originals/5b/be/f3/5bbef370086240108e6466a5dff5e2f9.png');
+            background-size: cover;
+            background-position: center;
+            height: 722px;
+        }
+        .login-right{
+            width: 40%;
+            // background-color: yellow;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .logo-register{
+                margin-bottom: 28px;
+                width: 40%;
+                text-align: center;
+                img{
+                    width: 40%;
+                border-radius: 50%;
+                }
+            }
+            .form-register{
+                padding: 10px;
+                width: 40%;
+                form{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    input[type=text],input[type=password],input[type=email]{
+                        height: 28px;
+                        padding-left: 5px;
+                        margin-top: 5px;
+                        margin-bottom: 5px;
+                        width: 100%;
+                        border: 1px solid rgba(var(--b6a,219,219,219),1);
+                        border-radius: 5px;
+                        color:rgba(var(--i1d,38,38,38),1) ;
+                    }
+                    input[type=password]{
+                        margin-bottom: 15px;
+                    }
+                    input[type=submit]{
+                        height: 26px;
+                        margin: 10px 0px 5px 0px;
+                        width: 102%;
+                        background-color: #3b5998;
+                        border: 1px solid #3b5998 ;
+                        border-radius: 5px;
+                        color: white;
+                        font-weight: bold;
+                    }
+                    a{
+                        color: #3b5998;
+                        font-size: 13px;
+                        // margin: 4px;
+                    }
+                }
+
+            }
+        }
+        }
+}
