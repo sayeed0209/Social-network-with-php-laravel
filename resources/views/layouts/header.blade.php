@@ -1,7 +1,7 @@
 <header>
 <div class="header">
     <div class="img-header">
-    <img src="https://logodownload.org/wp-content/uploads/2014/09/facebook-logo-3.png" alt="">
+    <a href="{{ url('/home')}}"><img src="https://logodownload.org/wp-content/uploads/2014/09/facebook-logo-3.png" alt=""></a>
     </div>
     <div class="search-header">
     <input type="search" name="" id="" placeholder="Search">
