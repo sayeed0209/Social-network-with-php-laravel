@@ -19,7 +19,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('pages.profile')->withPosts($posts);
+        return view('layouts.profile')->withPosts($posts);
     }
 
     /**
@@ -55,7 +55,7 @@ class PostController extends Controller
         }
         $post->save();
         Session::flash('success', 'post was successfully added');
-        return redirect('/profile');
+        return redirect('/home');
     }
 
     /**
@@ -74,7 +74,7 @@ class PostController extends Controller
     {
         $userid = User::where('name', $username)->get()->first()->id;
         $userposts = Post::where('user_id', $userid)->get();
-        return view('pages.profile')->withPosts($userposts);
+        return view('layouts.profile')->withPosts($userposts);
     }
     /**
      * Show the form for editing the specified resource.
@@ -107,5 +107,12 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    //edit
+    public function updateBio(){
+        // $userid = User::where('name', $username)->get()->first()->id;
+        return view('layouts.profileUpdate');
+        // ->withUsers($userId);;
     }
 }
