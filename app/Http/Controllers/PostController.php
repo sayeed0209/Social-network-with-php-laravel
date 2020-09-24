@@ -46,6 +46,11 @@ class PostController extends Controller
         $post = new Post();
         $post->body = $request->body;
         $post->user_id = Auth::user()->id;
+        if (isset($request->image)) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('image'), $imageName);
+            $post->image = $imageName;
+        }
         $post->save();
         Session::flash('success', 'post was successfully added');
         return redirect('/home');

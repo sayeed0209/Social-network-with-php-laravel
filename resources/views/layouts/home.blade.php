@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,7 +86,7 @@
 </div>
         <div class="container-right">
         <div class="comment-wall">
-  <form action="" method="POST">
+  <form action="{{ url('home/' . Auth::user()->id)}}" method="POST" enctype="multipart/form-data">
   @csrf
             <div class="container-text">
             <div class="textarea-wall">

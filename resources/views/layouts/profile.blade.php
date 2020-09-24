@@ -38,7 +38,7 @@
                 </div>
                 </div>
                 <div class="img-post">
-                    <img src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F20%2F2017%2F09%2Fkuwtk-5.jpg" alt="">
+                    <img src="{{asset('image/'. $post->image)}}" alt="">
                 </div>
                 <div class="like-post">
                 <div class="content-post">
