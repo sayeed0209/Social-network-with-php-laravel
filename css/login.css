@@ -1,0 +1,112 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.body-welcome {
+  background-image: url("https://elfinanciero.com.mx/graficos/gif/Face-logo.gif");
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.body-login {
+  margin: 0;
+  height: 100vh;
+  max-width: 100%;
+}
+
+.body-login .login-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.body-login .login-container .login-left {
+  width: 60%;
+  background-image: url("https://i.pinimg.com/originals/5b/be/f3/5bbef370086240108e6466a5dff5e2f9.png");
+  background-size: cover;
+  background-position: center;
+  height: 722px;
+}
+
+.body-login .login-container .login-right {
+  width: 40%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.body-login .login-container .login-right .logo-register {
+  margin-bottom: 28px;
+  width: 40%;
+  text-align: center;
+}
+
+.body-login .login-container .login-right .logo-register img {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.body-login .login-container .login-right .form-register {
+  padding: 10px;
+  width: 40%;
+}
+
+.body-login .login-container .login-right .form-register form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.body-login .login-container .login-right .form-register form input[type=text], .body-login .login-container .login-right .form-register form input[type=password], .body-login .login-container .login-right .form-register form input[type=email] {
+  height: 28px;
+  padding-left: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+  border: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
+  border-radius: 5px;
+  color: rgba(var(--i1d, 38, 38, 38), 1);
+}
+
+.body-login .login-container .login-right .form-register form input[type=password] {
+  margin-bottom: 15px;
+}
+
+.body-login .login-container .login-right .form-register form input[type=submit] {
+  height: 26px;
+  margin: 10px 0px 5px 0px;
+  width: 102%;
+  background-color: #3b5998;
+  border: 1px solid #3b5998;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+}
+
+.body-login .login-container .login-right .form-register form a {
+  color: #3b5998;
+  font-size: 13px;
+}
+/*# sourceMappingURL=login.css.map */
