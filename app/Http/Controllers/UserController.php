@@ -73,6 +73,13 @@ class UserController extends Controller
     {
         $post = User::find(Auth::user()->id);
         $post->bio = $request->bio;
+
+        if (isset($request->profile_photo_path)) {
+            $imageName = time() . '.' . $request->profile_photo_path->extension();
+            $request->profile_photo_path->move(public_path('image'), $imageName);
+            $post->profile_photo_path = $imageName;
+        }
+
         $post->save();
         return view('layouts.profileUpdate', compact('post'));
     }
