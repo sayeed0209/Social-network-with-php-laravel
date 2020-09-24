@@ -17,8 +17,8 @@
         <img src="https://dureeandcompany.com/wp-content/uploads/2018/09/BLOG-1-Kim-Kardashian.jpg" alt="">
         </div>
         <div class="user-profile">
-            <div class="user-name">Kim Kardashian <a href="{{ url('/updateProfile')}}"><i class="fas fa-pen"></i></a></div>
-            <div class="bio-profile">When there's so many haters and negative things, I really don't care.</div>
+            <div class="user-name">{{Auth::user()->name}} <a href="{{ url('/updateProfile')}}"><i class="fas fa-pen"></i></a></div>
+            <div class="bio-profile">{{Auth::user()->bio}}</div>
             <!-- <div class="update-profile-icon"><i class="fas fa-pen"></i></div> -->
         </div>
         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use finfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -41,6 +42,7 @@ class PostController extends Controller
     {
         $this->validate($request, [
             'body' => 'required|max:255',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $post = new Post();
@@ -82,7 +84,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        return view('layouts.postUpdate', compact('post'));
     }
     /**
      * Update the specified resource in storage.
@@ -108,7 +111,8 @@ class PostController extends Controller
     }
 
     //edit
-    public function updateBio(){
+    public function updateBio()
+    {
         // $userid = User::where('name', $username)->get()->first()->id;
         return view('layouts.profileUpdate');
         // ->withUsers($userId);;
