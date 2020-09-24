@@ -17,11 +17,12 @@
         <img src="https://dureeandcompany.com/wp-content/uploads/2018/09/BLOG-1-Kim-Kardashian.jpg" alt="">
         </div>
         <div class="user-profile">
-            <div class="user-name">Kim Kardashian</div>
-            <form action="">
-            <div class="bio-profile"><input type="text" placeholder="When there's so many haters and negative things, I really don't care."></div>
+            <div class="user-name">{{Auth::user()->name}}</div>
+        <form action="" method="post">
+                @csrf
+        <div class="bio-profile"><input type="text" value="" name="bio" placeholder="{{$post->bio}}"></div>
             <div class="update-profile-submit"><input type="submit" value="Edit"></div>
-            </form>
+         </form>
         </div>
         </div>
         </div>
