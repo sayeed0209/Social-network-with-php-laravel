@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
@@ -13,7 +17,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('layouts.profile');
+        $posts = Post::all();
+        return view('layouts.profile')->withPosts($posts);
     }
 
     /**
@@ -34,7 +39,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'body' => 'required|max:255',
+        ]);
+
+        $post = new Post();
+        $post->body = $request->body;
+        $post->user_id = Auth::user()->id;
+        $post->save();
+        Session::flash('success', 'post was successfully added');
+        return redirect('/home');
     }
 
     /**
@@ -48,6 +62,13 @@ class PostController extends Controller
         //
     }
 
+
+    public function getByUsername($username)
+    {
+        $userid = User::where('name', $username)->get()->first()->id;
+        $userposts = Post::where('user_id', $userid)->get();
+        return view('layouts.profile')->withPosts($userposts);
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -58,7 +79,6 @@ class PostController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -80,5 +100,12 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    //edit
+    public function updateBio(){
+        // $userid = User::where('name', $username)->get()->first()->id;
+        return view('layouts.profileUpdate');
+        // ->withUsers($userId);;
     }
 }

@@ -86,7 +86,7 @@
         <div class="container-right">
         <div class="comment-wall">
   <form action="" method="POST">
-      @csrf
+  @csrf
             <div class="container-text">
             <div class="textarea-wall">
                 <textarea name="body" id=""></textarea>

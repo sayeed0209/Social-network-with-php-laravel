@@ -26,10 +26,26 @@ Route::get('/', function () {
         return view('welcome');
     }
 });
-Route::get('/profile',[PostController::class,'index']);
+
+// Route::get('/profile',[PostController::class,'index']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/home', function () {
     return view('layouts.home');
 })->name('home');
 
+
+
+//profile
+
+Route::get('/profile',function(){
+    return redirect('/profile/'. auth()->user()->name);
+})->middleware(['auth:sanctum', 'verified']);
+
+
+Route::get('/profile/{username}',[PostController::class,'getByUsername'])->middleware(['auth:sanctum', 'verified']);
+Route::post('/home',[PostController::class,'store'])->middleware(['auth:sanctum', 'verified']);
+
+// profile update bio
+
+Route::get('/updateProfile',[PostController::class,'updateBio'])->middleware(['auth:sanctum', 'verified']);
 

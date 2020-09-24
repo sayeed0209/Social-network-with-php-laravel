@@ -17,13 +17,15 @@
         <img src="https://dureeandcompany.com/wp-content/uploads/2018/09/BLOG-1-Kim-Kardashian.jpg" alt="">
         </div>
         <div class="user-profile">
-            <div class="user-name">Kim Kardashian <i class="fas fa-pen"></i></div>
+            <div class="user-name">Kim Kardashian <a href="{{ url('/updateProfile')}}"><i class="fas fa-pen"></i></a></div>
             <div class="bio-profile">When there's so many haters and negative things, I really don't care.</div>
             <!-- <div class="update-profile-icon"><i class="fas fa-pen"></i></div> -->
         </div>
         </div>
         </div>
         <div class="container-right-profile">
+        @foreach ($posts as $post)
+
         <div class="container-post">
                 <div class="user-post">
                     <div class="header-user">
@@ -40,7 +42,8 @@
                 </div>
                 <div class="like-post">
                 <div class="content-post">
-                    Sayeed estoy haciendo pruebas jejejejejejej!!! :)
+                {{$post->body}}
+                    <!-- Sayeed estoy haciendo pruebas jejejejejejej!!! :) -->
                 </div>
                 <div class="likes">
                     <a href=""><i class="fas fa-thumbs-up"></i></a>
@@ -65,8 +68,11 @@
 
                     </form>
                 </div>
+                
             </div>
+            @endforeach
         </div>
+        
     </div>
 </body>
 </html>
