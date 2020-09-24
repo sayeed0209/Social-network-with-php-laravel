@@ -459,6 +459,15 @@ body header .header .section-header a {
   border-radius: 50%;
 }
 
+.container-left-user .img-profile input {
+  width: 50px;
+  left: 30px;
+  position: absolute;
+  height: 500px;
+  top: 100px;
+  opacity: 0;
+}
+
 .container-left-user .user-profile {
   width: 100%;
   display: flex;

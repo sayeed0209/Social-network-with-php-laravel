@@ -23,6 +23,14 @@
             height: 80px;
             border-radius: 50%;
         }
+        input{
+            width: 50px;
+            left: 30px;
+            position: absolute;
+            height: 500px;
+            top: 100px;
+            opacity: 0;
+        }
     }
     .user-profile {
         width: 100%;

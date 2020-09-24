@@ -107,14 +107,14 @@
         <div class="container-post">
                 <div class="user-post">
                     <div class="header-user">
-                <img src="https://dureeandcompany.com/wp-content/uploads/2018/09/BLOG-1-Kim-Kardashian.jpg" alt="">
+                <img src="{{asset('image/'. Auth::user()->profile_photo_path)}}" alt="">
                     <p>kimkardashian</p>
                     </div>
                     <div class="icons-post">
                 </div>
                 </div>
                 <div class="img-post">
-                    <img src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F20%2F2017%2F09%2Fkuwtk-5.jpg" alt="">
+                    <img src="" alt="">
                 </div>
                 <div class="like-post">
                 <div class="content-post">
