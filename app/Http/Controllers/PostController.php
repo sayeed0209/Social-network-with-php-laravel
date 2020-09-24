@@ -94,9 +94,17 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $post = Post::find($request->id);
+        $post->body = $request->body;
+        if (isset($request->image)) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('image'), $imageName);
+            $post->image = $imageName;
+        }
+        $post->save();
+        return redirect('/profile');
     }
 
     /**

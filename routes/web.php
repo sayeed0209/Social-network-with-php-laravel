@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 //si la session esta activa te hace un redirect a home si no lo esta te enseña la vista de welcome
 Route::get('/', function () {
-    if(Auth::check()) {
+    if (Auth::check()) {
         return redirect('/home');
     } else {
         return view('welcome');
@@ -37,16 +38,16 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/home', function () {
 
 //profile
 
-Route::get('/profile',function(){
-    return redirect('/profile/'. auth()->user()->name);
+Route::get('/profile', function () {
+    return redirect('/profile/' . auth()->user()->name);
 })->middleware(['auth:sanctum', 'verified']);
 
 
-Route::get('/profile/{username}',[PostController::class,'getByUsername'])->middleware(['auth:sanctum', 'verified']);
-Route::post('/home/{username}',[PostController::class,'store'])->middleware(['auth:sanctum', 'verified']);
-Route::get('/postUpdate',[PostController::class,'edit'])->middleware(['auth:sanctum', 'verified']);
+Route::get('/profile/{username}', [PostController::class, 'getByUsername'])->middleware(['auth:sanctum', 'verified']);
+Route::post('/home/{username}', [PostController::class, 'store'])->middleware(['auth:sanctum', 'verified']);
+Route::get('/postUpdate/{id}', [PostController::class, 'edit'])->middleware(['auth:sanctum', 'verified']);
+ Route::post('/postUpdate/{id}',[PostController::class,'update']);
 
 // profile update bio
 
-Route::get('/updateProfile',[PostController::class,'updateBio'])->middleware(['auth:sanctum', 'verified']);
-
+Route::get('/updateProfile', [PostController::class, 'updateBio'])->middleware(['auth:sanctum', 'verified']);

@@ -33,7 +33,7 @@
                     <p>kimkardashian</p>
                     </div>
                     <div class="icons-post">
-                <i class="fas fa-pen"></i>
+                <a href="{{url('/postUpdate/'.$post->id) }}"><i class="fas fa-pen"></i></a>    
                 <i class="fas fa-times"></i>
                 </div>
                 </div>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="comment-insert">
                     <form action="">
-                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                        <textarea name="" cols="30" rows="10"></textarea>
                         <input type="submit" value="Comment">
 
                     </form>
