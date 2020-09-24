@@ -34,7 +34,7 @@
                     </div>
                     <div class="icons-post">
                 <a href="{{url('/postUpdate/'.$post->id) }}"><i class="fas fa-pen"></i></a>    
-                <i class="fas fa-times"></i>
+               <a href="{{url('/delete/'.$post->id) }}"><i class="fas fa-times"></i></a> 
                 </div>
                 </div>
                 <div class="img-post">
