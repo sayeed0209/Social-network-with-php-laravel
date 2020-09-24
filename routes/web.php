@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,4 +52,5 @@ Route::get('/postUpdate/{id}', [PostController::class, 'edit'])->middleware(['au
 
 // profile update bio
 
-Route::get('/updateProfile', [PostController::class, 'updateBio'])->middleware(['auth:sanctum', 'verified']);
+Route::get('/updateProfile', [UserController::class, 'edit'])->middleware(['auth:sanctum', 'verified']);
+Route::post('/updateProfile', [UserController::class, 'update'])->middleware(['auth:sanctum', 'verified']);
