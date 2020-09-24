@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use finfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -41,11 +42,17 @@ class PostController extends Controller
     {
         $this->validate($request, [
             'body' => 'required|max:255',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $post = new Post();
         $post->body = $request->body;
         $post->user_id = Auth::user()->id;
+        if (isset($request->image)) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('image'), $imageName);
+            $post->image = $imageName;
+        }
         $post->save();
         Session::flash('success', 'post was successfully added');
         return redirect('/profile');
@@ -77,7 +84,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
     /**
      * Update the specified resource in storage.

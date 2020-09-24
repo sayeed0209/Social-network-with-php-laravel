@@ -23,7 +23,7 @@ Route::get('/profile',function(){
 
 
 Route::get('/profile/{username}',[PostController::class,'getByUsername'])->middleware(['auth:sanctum', 'verified']);
-Route::post('/profile',[PostController::class,'store'])->middleware(['auth:sanctum', 'verified']);
+Route::post('/profile/{username}',[PostController::class,'store'])->middleware(['auth:sanctum', 'verified']);
 
 
 
