@@ -18,7 +18,7 @@
         </div>
         <div class="user-profile">
             <div class="user-name">Kim Kardashian</div>
-            <div class="bio-profile">When there's so many haters and negative things, I really don't care.</div>
+            <div class="bio-profile">{{Auth::user()->bio}}</div>
             <!-- <div class="update-profile-icon"><i class="fas fa-pen"></i></div> -->
         </div>
         </div>
@@ -35,12 +35,12 @@
                 </div>
                 <form action="" method="POST">
                 <div class="img-post">
-                    <img src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F20%2F2017%2F09%2Fkuwtk-5.jpg" alt="" value="{{asset('image/'. $post->image)}}">
+                    <img src="{{asset('image/'. $post->image)}}" alt="">
                 </div>
                 
                 <div class="post-container-update">
                 <div class="content-post">
-                <input type="text" name="" id="" placeholder="Sayeed estoy haciendo pruebas jejejejejejej!!! :)">
+                <input type="text" name="body" id="" value="{{$post->body}}" placeholder="Sayeed estoy haciendo pruebas jejejejejejej!!! :)">
                 </div>
                 <div class="update-post-buttons">
                     <i class="fas fa-upload"></i>
