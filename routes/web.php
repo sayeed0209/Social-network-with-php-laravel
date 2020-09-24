@@ -44,7 +44,7 @@ Route::get('/profile',function(){
 
 Route::get('/profile/{username}',[PostController::class,'getByUsername'])->middleware(['auth:sanctum', 'verified']);
 Route::post('/home/{username}',[PostController::class,'store'])->middleware(['auth:sanctum', 'verified']);
-Route::get('/postUpdate',[PostController::class,'edit'])->middleware(['auth:sanctum', 'verified']);
+Route::get('/postUpdate/{id}',[PostController::class,'edit'])->middleware(['auth:sanctum', 'verified']);
 
 // profile update bio
 
