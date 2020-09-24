@@ -116,15 +116,9 @@ class PostController extends Controller
     public function destroy($id)
     {
         Post::where('id', $id)->delete();
-        
+
         return  $this->index();
     }
 
-    //edit
-    public function updateBio()
-    {
-        // $userid = User::where('name', $username)->get()->first()->id;
-        return view('layouts.profileUpdate');
-        // ->withUsers($userId);;
-    }
+    
 }
