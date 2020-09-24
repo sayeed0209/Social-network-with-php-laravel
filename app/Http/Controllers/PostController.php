@@ -84,7 +84,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        
+        $post = Post::find($id);
+        return view('layouts.postUpdate', compact('post'));
     }
     /**
      * Update the specified resource in storage.
@@ -110,7 +111,8 @@ class PostController extends Controller
     }
 
     //edit
-    public function updateBio(){
+    public function updateBio()
+    {
         // $userid = User::where('name', $username)->get()->first()->id;
         return view('layouts.profileUpdate');
         // ->withUsers($userId);;

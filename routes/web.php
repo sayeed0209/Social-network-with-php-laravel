@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,11 +43,8 @@ Route::get('/profile',function(){
 
 
 Route::get('/profile/{username}',[PostController::class,'getByUsername'])->middleware(['auth:sanctum', 'verified']);
-<<<<<<< HEAD
-Route::post('/profile/{username}',[PostController::class,'store'])->middleware(['auth:sanctum', 'verified']);
-=======
 Route::post('/home/{username}',[PostController::class,'store'])->middleware(['auth:sanctum', 'verified']);
->>>>>>> 21bfe1533f35cce0fb8e94aecb805c7893af739e
+Route::get('/postUpdate',[PostController::class,'edit'])->middleware(['auth:sanctum', 'verified']);
 
 // profile update bio
 
