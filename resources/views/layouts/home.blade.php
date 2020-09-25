@@ -20,6 +20,7 @@
         </tr>
         <tr>
             <td>Khloe Kardashian</td>
+            <td>Add me+</td>
         </tr>
         <tr>
             <td>Kris Kardashian</td>
