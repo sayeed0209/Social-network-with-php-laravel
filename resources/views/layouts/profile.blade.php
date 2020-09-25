@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"> 
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="{{asset('js/app.js')}}"></script>
 
     <title>Facebook</title>
 </head>
@@ -46,8 +48,8 @@
                     <!-- Sayeed estoy haciendo pruebas jejejejejejej!!! :) -->
                 </div>
                 <div class="likes">
-                    <a href=""><i class="fas fa-thumbs-up"></i></a>
-                    <a href=""><i class="fas fa-thumbs-down"></i></a>
+                    <i data-id="{{$post->id}}" class="fas fa-thumbs-up"></i>
+                    <i  data-id="{{$post->id}}" class="fas fa-thumbs-down"></i>
                 </div>
                 </div>
                 <!-- <div class="comment">
@@ -65,7 +67,6 @@
                     <form action="">
                         <textarea name="" cols="30" rows="10"></textarea>
                         <input type="submit" value="Comment">
-
                     </form>
                 </div>
                 
@@ -74,5 +75,50 @@
         </div>
         
     </div>
+
+
+<script>
+   
+    window.onload = function(){
+        
+            console.log("like")
+        document.querySelectorAll('.fa-thumbs-up').forEach(function(like){
+            like.onclick=(function(){
+        var currentTarget = event.currentTarget
+        var post_id=currentTarget.getAttribute('data-id')
+        currentTarget.style.color='blue';
+        axios.post('{{url("create_like")}}',
+        {'post_id':post_id},
+        {
+            headers:{
+                'X-CSRF-TOKEN':document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        }).then(function(res){
+           console.log(res)
+        })
+      })
+    })
+    
+    document.querySelectorAll('.fa-thumbs-down').forEach(function(like){
+            like.onclick=(function(){
+        var currentTarget = event.currentTarget
+        currentTarget.style.color='red';
+        var post_id=currentTarget.getAttribute('data-id')
+        axios.post('{{url("create_dislike")}}',
+        {'post_id':post_id},
+        {
+            headers:{
+                'X-CSRF-TOKEN':document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        }).then(function(res){
+           console.log(res)
+        })
+      })
+    })
+    }
+   
+</script>
+
+
 </body>
 </html>
