@@ -45,9 +45,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $allUser = User::all();
+        $users = [];
+        foreach ($allUser as $user) {
+            if (Auth::user()->id != $user->id) {
+             $user->profile_photo_path = asset('image/'. $user->profile_photo_path);
+                array_push($users, $user);
+            }
+        }
+        return json_encode($users);
     }
 
     /**

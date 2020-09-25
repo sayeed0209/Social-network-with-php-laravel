@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"> 
+    <script src="{{asset('js/app.js')}}"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <title>Facebook</title>
 </head>
@@ -15,73 +16,11 @@
         <div class="container-left">
         <input type="text" placeholder="">
 
-        <table class="table-friend">
+        <table class="table-friend" id="users">
         <tr class="header-table">
+           
         </tr>
-        <tr>
-            <td>Khloe Kardashian</td>
-            <td>Add me+</td>
-        </tr>
-        <tr>
-            <td>Kris Kardashian</td>
-        </tr>
-        <tr>
-            <td>Kourtney Kardashian</td>
-        </tr>
-        <tr>
-            <td>Robert Kardashian</td>
-        </tr>
-        <tr>
-            <td>Kendall Jenner</td>
-        </tr>
-        <tr>
-            <td>Kylie Jenner</td>
-        </tr>
-        <tr>
-            <td>Kanye West</td>
-        </tr>
-        <tr>
-            <td>Khloe Kardashian</td>
-        </tr>
-        <tr>
-            <td>Kris Kardashian</td>
-        </tr>
-        <tr>
-            <td>Kourtney Kardashian</td>
-        </tr>
-        <tr>
-            <td>Robert Kardashian</td>
-        </tr>
-        <tr>
-            <td>Kendall Jenner</td>
-        </tr>
-        <tr>
-            <td>Kylie Jenner</td>
-        </tr>
-        <tr>
-            <td>Kanye West</td>
-        </tr>
-        <tr>
-            <td>Khloe Kardashian</td>
-        </tr>
-        <tr>
-            <td>Kris Kardashian</td>
-        </tr>
-        <tr>
-            <td>Kourtney Kardashian</td>
-        </tr>
-        <tr>
-            <td>Robert Kardashian</td>
-        </tr>
-        <tr>
-            <td>Kendall Jenner</td>
-        </tr>
-        <tr>
-            <td>Kylie Jenner</td>
-        </tr>
-        <tr>
-            <td>Kanye West</td>
-        </tr>
+        
         </table>
         </div>
 </div>
@@ -146,5 +85,33 @@
                 </div>
         </div>
     </div>
+
+    <script>
+        window.onload=function(){
+            axios.post("{{url('showuser')}}",{},
+            {
+                headers:{'X-CSRF-TOKEN':"{{csrf_token()}}"}
+            }
+       
+        ).then(function(res){
+            console.log(res)
+            var users = res.data
+            users.forEach(function(user){
+              var tr = document.createElement('tr')
+              var td = document.createElement('td')
+              var td1 = document.createElement('td')
+              var image_td = document.createElement('td')
+                td.textContent=user.name;
+                td1.innerHTML='Add Friend <i class="fas fa-user-plus"></i>';
+                image_td.innerHTML='<img src="'+user.profile_photo_path+'" alt="" width="50px" style="border-radius:50%";> ';
+                
+                tr.appendChild(image_td)
+                tr.appendChild(td)
+                tr.appendChild(td1)
+                document.getElementById('users').appendChild(tr)
+            })
+        })
+    }
+    </script>
 </body>
 </html>
