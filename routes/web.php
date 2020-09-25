@@ -53,13 +53,8 @@ Route::get('/delete/{id}', [PostController::class, 'destroy']);
 // like route
 Route::post('/create_like', [LikeController::class, 'create']);
 Route::post('/create_dislike', [LikeController::class, 'store']);
-// Route::post('/create_like', function(){
-//     echo 'like';
-// });
-// Route::post('/create_dislike', function(){
-//     echo 'dislike';
-// });
-// profile update bio
+// add friend 
+Route::post('/showuser', [UserController::class, 'show']);
 
 Route::get('/updateProfile', [UserController::class, 'edit'])->middleware(['auth:sanctum', 'verified']);
 Route::post('/updateProfile', [UserController::class, 'update'])->middleware(['auth:sanctum', 'verified']);
