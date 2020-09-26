@@ -47,7 +47,7 @@
                 </form>
                 {{-- finish post --}}
             </div>
-
+            @foreach($allowedPosts as $post)
             <div class="container-post">
                 <div class="user-post">
                     <div class="header-user">
@@ -58,15 +58,15 @@
                     </div>
                 </div>
                 <div class="img-post">
-                    <img src="" alt="">
+                    <img src="{{$post->image}}" alt="">
                 </div>
                 <div class="like-post">
                     <div class="content-post">
-                        Sayeed estoy haciendo pruebas jejejejejejej!!! :)
+                        {{$post->body}}
                     </div>
                     <div class="likes">
-                        <a href=""><i class="fas fa-thumbs-up"></i></a>
-                        <a href=""><i class="fas fa-thumbs-down"></i></a>
+                        <a href=""><i  data-id="" class="fas fa-thumbs-up"></i></a>
+                        <a href=""><i data-id="" class="fas fa-thumbs-down"></i></a>
                     </div>
                 </div>
                 <!-- <div class="comment">
@@ -88,8 +88,10 @@
                     </form>
                 </div>
             </div>
+            @endforeach
         </div>
-
+    
+ 
         <script>
             window.onload = function() {
                 axios.post("{{url('showuser')}}", {}, {
