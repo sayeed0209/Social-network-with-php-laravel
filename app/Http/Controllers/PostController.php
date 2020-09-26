@@ -60,7 +60,7 @@ class PostController extends Controller
 
     // funcion todos los post de nuestros amigos y los nuestros.
     public function getAllowedPosts(){
-        $posts = Post::all();
+        $posts = Post::orderBy('created_at', 'DESC')->get();
         $usersInstance = new UserController();
         $friendsInstance = new FriendController();
         $ids = $friendsInstance->getFriendsID();
