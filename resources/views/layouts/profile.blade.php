@@ -49,7 +49,7 @@
                 </div>
                 <div class="likes">
                     <i data-id="{{$post->id}}" class="fas fa-thumbs-up"></i>
-                    <i  data-id="{{$post->id}}" class="fas fa-thumbs-down"></i>
+                    <i data-id="{{$post->id}}" class="fas fa-thumbs-down"></i>
                 </div>
                 </div>
                 <!-- <div class="comment">
@@ -80,8 +80,6 @@
 <script>
    
     window.onload = function(){
-        
-            console.log("like")
         document.querySelectorAll('.fa-thumbs-up').forEach(function(like){
             like.onclick=(function(){
         var currentTarget = event.currentTarget
@@ -94,7 +92,7 @@
                 'X-CSRF-TOKEN':document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             }
         }).then(function(res){
-           console.log(res)
+        //    console.log(res)
         })
       })
     })
@@ -111,7 +109,7 @@
                 'X-CSRF-TOKEN':document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             }
         }).then(function(res){
-           console.log(res)
+        //    console.log(res)
         })
       })
     })
