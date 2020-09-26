@@ -118,4 +118,19 @@ class UserController extends Controller
         return json_encode($data);
         // return $request;
     }
+
+    public function getUsersById($ids){
+        $users = User::get();
+        
+        array_unshift($ids , 0);
+        $usersData = [];
+        
+        foreach($users as $user){
+            if(array_search($user->id, $ids) != null){
+                $user->profile_photo_path = asset('image/' . $user->profile_photo_path);
+                array_push($usersData, $user);
+            }
+        }
+        return $usersData;
+    }
 }
