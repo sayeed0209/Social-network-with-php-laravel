@@ -12,19 +12,21 @@
     @include('layouts.header')
     <div class="container">
     <div class="container-left-profile">
-    <form action="">
+    <form action="" method="post" enctype="multipart/form-data">
+        @csrf
         <div class="container-left-user">
         
         <div class="img-profile">
-        <input type="file" name="image" id="">
-        <img src="https://dureeandcompany.com/wp-content/uploads/2018/09/BLOG-1-Kim-Kardashian.jpg" alt="">
+            <input type="file" name="profile_photo_path" id="">
+        <img src="{{asset('image/'. $post->profile_photo_path)}}" alt="">
         </div>
         <div class="user-profile">
-            <div class="user-name">Kim Kardashian</div>
-            
-            <div class="bio-profile"><input type="text" placeholder="When there's so many haters and negative things, I really don't care."></div>
+            <div class="user-name">{{Auth::user()->name}}</div>
+       
+                
+        <div class="bio-profile"><input type="text" value="{{$post->bio}}" name="bio" ></div>
             <div class="update-profile-submit"><input type="submit" value="Edit"></div>
-            </form>
+         </form>
         </div>
         </div>
         </div>

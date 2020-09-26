@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use App\Models\like;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class LikeController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +15,7 @@ class LikeController extends Controller
      */
     public function index()
     {
+        return view('layouts.profileUpdate');
     }
 
     /**
@@ -22,12 +23,9 @@ class LikeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        $createLike = new Like();
-        $createLike->user_id = Auth::user()->id;
-        $createLike->post_id = $request->post_id;
-        $createLike->save();
+        //
     }
 
     /**
@@ -38,11 +36,7 @@ class LikeController extends Controller
      */
     public function store(Request $request)
     {
-        $createDislike = new Like();
-        $createDislike->user_id = Auth::user()->id;
-        $createDislike->post_id = $request->post_id;
-        $createDislike->type = false;
-        $createDislike->save();
+        //
     }
 
     /**
@@ -62,9 +56,10 @@ class LikeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        $post = Auth::user();
+        return view('layouts.profileUpdate', compact('post'));
     }
 
     /**
@@ -74,9 +69,19 @@ class LikeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $post = User::find(Auth::user()->id);
+        $post->bio = $request->bio;
+
+        if (isset($request->profile_photo_path)) {
+            $imageName = time() . '.' . $request->profile_photo_path->extension();
+            $request->profile_photo_path->move(public_path('image'), $imageName);
+            $post->profile_photo_path = $imageName;
+        }
+
+        $post->save();
+        return view('layouts.profileUpdate', compact('post'));
     }
 
     /**

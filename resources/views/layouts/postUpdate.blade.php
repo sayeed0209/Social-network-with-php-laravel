@@ -17,7 +17,7 @@
         <img src="https://dureeandcompany.com/wp-content/uploads/2018/09/BLOG-1-Kim-Kardashian.jpg" alt="">
         </div>
         <div class="user-profile">
-            <div class="user-name">Kim Kardashian</div>
+            <div class="user-name">{{Auth::user()->name}}</div>
             <div class="bio-profile">{{Auth::user()->bio}}</div>
             <!-- <div class="update-profile-icon"><i class="fas fa-pen"></i></div> -->
         </div>

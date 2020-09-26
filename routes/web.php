@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,10 +45,21 @@ Route::get('/profile', function () {
 })->middleware(['auth:sanctum', 'verified']);
 
 
-Route::get('/profile/{username}',[PostController::class,'getByUsername'])->middleware(['auth:sanctum', 'verified']);
-Route::post('/home/{username}',[PostController::class,'store'])->middleware(['auth:sanctum', 'verified']);
-Route::get('/postUpdate/{id}',[PostController::class,'edit'])->middleware(['auth:sanctum', 'verified']);
-
+Route::get('/profile/{username}', [PostController::class, 'getByUsername'])->middleware(['auth:sanctum', 'verified']);
+Route::post('/home/{username}', [PostController::class, 'store'])->middleware(['auth:sanctum', 'verified']);
+Route::get('/postUpdate/{id}', [PostController::class, 'edit'])->middleware(['auth:sanctum', 'verified']);
+Route::post('/postUpdate/{id}', [PostController::class, 'update']);
+Route::get('/delete/{id}', [PostController::class, 'destroy']);
+// like route
+Route::post('/create_like', [LikeController::class, 'create']);
+Route::post('/create_dislike', [LikeController::class, 'store']);
+// Route::post('/create_like', function(){
+//     echo 'like';
+// });
+// Route::post('/create_dislike', function(){
+//     echo 'dislike';
+// });
 // profile update bio
 
-Route::get('/updateProfile', [PostController::class, 'updateBio'])->middleware(['auth:sanctum', 'verified']);
+Route::get('/updateProfile', [UserController::class, 'edit'])->middleware(['auth:sanctum', 'verified']);
+Route::post('/updateProfile', [UserController::class, 'update'])->middleware(['auth:sanctum', 'verified']);

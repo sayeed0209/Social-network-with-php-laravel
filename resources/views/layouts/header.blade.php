@@ -7,10 +7,9 @@
     <input type="search" name="" id="" placeholder="Search">
     </div>
     <div class="section-header">
-        <a href="{{ url('/profile')}}"><img src="https://dureeandcompany.com/wp-content/uploads/2018/09/BLOG-1-Kim-Kardashian.jpg" alt=""></a>
+        <a href="{{ url('/profile')}}"><img src="{{asset('image/'. Auth::user()->profile_photo_path)}}" alt=""></a>
         <form method="POST" action="{{ route('logout') }}">
                     @csrf
-
                     <x-jet-responsive-nav-link href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
