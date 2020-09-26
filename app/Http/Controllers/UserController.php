@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Mockery\Undefined;
 
 class UserController extends Controller
 {
@@ -34,9 +35,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function getUserById($id)
     {
-        //
+        return User::find($id);
     }
 
     /**
@@ -45,14 +46,21 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show_notYetFriends()
     {
+        // all friends id
+        $friends = (new FriendController)->getFriendsID();
+        array_unshift($friends, 0);
+        // all users
         $allUser = User::all();
         $users = [];
+
         foreach ($allUser as $user) {
             if (Auth::user()->id != $user->id) {
-             $user->profile_photo_path = asset('image/'. $user->profile_photo_path);
-                array_push($users, $user);
+                if (array_search($user->id, $friends) == null) {
+                    $user->profile_photo_path = asset('image/' . $user->profile_photo_path);
+                    array_push($users, $user);
+                }
             }
         }
         return json_encode($users);
@@ -101,5 +109,13 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search_user(Request $request)
+    {
+        $data = User::where('name', 'like', '%' . $request->data . '%')->get();
+
+        return json_encode($data);
+        // return $request;
     }
 }

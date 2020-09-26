@@ -1,11 +1,11 @@
 <?php
 
+use App\Http\Controllers\FriendController;
 use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,7 +54,11 @@ Route::get('/delete/{id}', [PostController::class, 'destroy']);
 Route::post('/create_like', [LikeController::class, 'create']);
 Route::post('/create_dislike', [LikeController::class, 'store']);
 // add friend 
-Route::post('/showuser', [UserController::class, 'show']);
+Route::post('/showuser', [UserController::class, 'show_notYetFriends']);
+// for search user
+Route::post('/search_user', [UserController::class, 'search_user']);
+Route::get('/showFriends', [FriendController::class, 'index']);
+Route::get('/add_friend/{user_id}', [FriendController::class, 'addFriend']);
 
 Route::get('/updateProfile', [UserController::class, 'edit'])->middleware(['auth:sanctum', 'verified']);
 Route::post('/updateProfile', [UserController::class, 'update'])->middleware(['auth:sanctum', 'verified']);
