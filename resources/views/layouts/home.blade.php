@@ -99,7 +99,7 @@
                     }
 
                 ).then(function(res) {
-                    console.log(res)
+                    // console.log(res)
                     var users = res.data
                     users.forEach(function(user) {
                         var tr = document.createElement('tr')
@@ -131,7 +131,7 @@
                           {headers:{'X-CSRF-TOKEN': "{{csrf_token()}}"}
                             } 
                           ).then(function(res){
-                              console.log(res.data)
+                            //   console.log(res.data)
                           })}
                 })
 

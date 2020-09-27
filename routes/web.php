@@ -51,8 +51,9 @@ Route::get('/postUpdate/{id}', [PostController::class, 'edit'])->middleware(['au
 Route::post('/postUpdate/{id}', [PostController::class, 'update']);
 Route::get('/delete/{id}', [PostController::class, 'destroy']);
 // like route
-Route::post('/create_like', [LikeController::class, 'create']);
-Route::post('/create_dislike', [LikeController::class, 'store']);
+// Route::post('/create_like', [LikeController::class, 'create']);
+// Route::post('/create_dislike', [LikeController::class, 'store']);
+Route::post('/like', [LikeController::class, 'index'])->middleware(['auth:sanctum', 'verified']);
 // add friend 
 Route::post('/showuser', [UserController::class, 'show_notYetFriends']);
 // for search user
