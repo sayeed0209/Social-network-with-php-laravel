@@ -58,6 +58,35 @@ class PostController extends Controller
         return redirect('/home');
     }
 
+    // funcion todos los post de nuestros amigos y los nuestros.
+    public function getAllowedPosts(){
+        $posts = Post::orderBy('created_at', 'DESC')->get();
+        $usersInstance = new UserController();
+        $friendsInstance = new FriendController();
+        $ids = $friendsInstance->getFriendsID();
+        array_push($ids, Auth::user()->id);
+        $users = $usersInstance->getUsersById($ids);
+
+        array_unshift($ids , 0);
+        $allowedPosts = [];
+        $postOwners = [];
+        $i=[];
+        foreach($posts as $post){
+            if(array_search($post->user_id, $ids) != null){
+                foreach($users as $user){array_push($i, $user->id);
+                    if($user->id == $post->user_id){
+                        
+                        // $user->profile_photo_path = asset('image/' . $user->profile_photo_path);
+                        array_push($postOwners, $user);
+                    }
+                }
+                $post->image = asset('image/' . $post->image);
+                array_push($allowedPosts, $post);
+            }
+        }
+        return view('layouts.home', ['allowedPosts' => $allowedPosts, 'postOwners' => $postOwners]);
+
+    }
     /**
      * Display the specified resource.
      *

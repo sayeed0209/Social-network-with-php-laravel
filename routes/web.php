@@ -63,3 +63,4 @@ Route::get('/add_friend/{user_id}', [FriendController::class, 'addFriend']);
 
 Route::get('/updateProfile', [UserController::class, 'edit'])->middleware(['auth:sanctum', 'verified']);
 Route::post('/updateProfile', [UserController::class, 'update'])->middleware(['auth:sanctum', 'verified']);
+Route::get('/home', [PostController::class, 'getAllowedPosts'])->middleware(['auth:sanctum', 'verified']);

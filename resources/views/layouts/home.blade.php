@@ -47,26 +47,27 @@
                 </form>
                 {{-- finish post --}}
             </div>
-
+            
+            @foreach($allowedPosts as $key=>$post)
             <div class="container-post">
                 <div class="user-post">
                     <div class="header-user">
-                        <img src="{{asset('image/'. Auth::user()->profile_photo_path)}}" alt="">
-                        <p>kimkardashian</p>
+                        <img src="{{$postOwners[$key]->profile_photo_path}}" alt="">
+                        <p>{{$postOwners[$key]->name}}</p>
                     </div>
                     <div class="icons-post">
                     </div>
                 </div>
                 <div class="img-post">
-                    <img src="" alt="">
+                    <img src="{{$post->image}}" alt="">
                 </div>
                 <div class="like-post">
                     <div class="content-post">
-                        Sayeed estoy haciendo pruebas jejejejejejej!!! :)
+                        {{$post->body}}
                     </div>
                     <div class="likes">
-                        <a href=""><i class="fas fa-thumbs-up"></i></a>
-                        <a href=""><i class="fas fa-thumbs-down"></i></a>
+                        <a href=""><i  data-id="" class="fas fa-thumbs-up"></i></a>
+                        <a href=""><i data-id="" class="fas fa-thumbs-down"></i></a>
                     </div>
                 </div>
                 <!-- <div class="comment">
@@ -88,8 +89,10 @@
                     </form>
                 </div>
             </div>
+            @endforeach
         </div>
-
+    
+ 
         <script>
             window.onload = function() {
                 axios.post("{{url('showuser')}}", {}, {

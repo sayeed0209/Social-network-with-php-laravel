@@ -15,6 +15,7 @@
     <form action="" method="post" enctype="multipart/form-data">
         @csrf
         <div class="container-left-user">
+        
         <div class="img-profile">
             <input type="file" name="profile_photo_path" id="">
         <img src="{{asset('image/'. $post->profile_photo_path)}}" alt="">

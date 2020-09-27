@@ -33,19 +33,19 @@
                     <div class="icons-post">
                 </div>
                 </div>
-                <form action="" method="POST" enctype="multipart/form-data">
-                    @csrf
+                <form action="" method="POST">
                 <div class="img-post">
                     <img src="{{asset('image/'. $post->image)}}" alt="">
                 </div>
-
+                
                 <div class="post-container-update">
                 <div class="content-post">
                 <input type="text" name="body" id="" value="{{$post->body}}" placeholder="Sayeed estoy haciendo pruebas jejejejejejej!!! :)">
                 </div>
                 <div class="update-post-buttons">
                     <i class="fas fa-upload"></i>
-                   <input type="file" name="image" id="">
+                    <input type="file" name="" id="">
+
                     <input type="submit" value="Edit Post">
                     <!-- <a href=""><i class="fas fa-thumbs-up"></i></a>
                     <a href=""><i class="fas fa-thumbs-down"></i></a> -->
