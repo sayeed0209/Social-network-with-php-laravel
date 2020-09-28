@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
+use Illuminate\Support\Facades\Session;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -11,9 +15,20 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $this->validate($request, [
+            'post_id' => 'exists:posts,id|numeric',
+            'comment' => 'required'
+
+        ]);
+        $comment = new Comment();
+        $comment->comment = $request->comment;
+        $comment->user_id= Auth::user()->id;
+        $comment->post_id = $request->post_id;
+        $comment->save();
+        Session::flash('success', 'Your comment was successfully added');
+        return redirect()->back();
     }
 
     /**
@@ -77,8 +92,10 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
+    // public function destroy($id)
+    // {
+    //     Comment::where('id', $id)->delete();
+
+    //     // return  $this->index();
+    // }
 }
