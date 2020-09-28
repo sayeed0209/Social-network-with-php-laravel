@@ -165,6 +165,8 @@
                           {headers:{'X-CSRF-TOKEN': "{{csrf_token()}}"}} 
                           ).then(function(res){
                             //   console.log(res.data)
+                              $userData = res.data;
+                              for(var i = 0; i<$userData.length;)
                           })}
                 })
 
