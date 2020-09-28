@@ -102,6 +102,12 @@ class PostController extends Controller
         return $post;
     }
 
+    public function getById($id)
+    {
+        $user = User::where('id', $id)->get()->first();
+        $userposts = Post::where('user_id', $user->id)->get();
+        return view('layouts.postSearch')->withPosts($userposts)->with('user', $user);
+    }
 
     public function getByUsername($username)
     {
