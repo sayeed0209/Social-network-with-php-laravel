@@ -118,6 +118,7 @@
                     
                 </div>
                 @endforeach
+                <a href="" id="loadMore">Load More</a>
                 <div class="comment-insert">
                     @if (Auth::check())
                     <form action="{{url('/comment')}}" method="POST">
@@ -224,6 +225,20 @@
             })
         })
     })
+
+    $(function () {
+    $(".comment-user").slice(0, 2).show();
+    $("#loadMore").on('click', function (e) {
+        e.preventDefault();
+        $(".comment-user:hidden").slice(0, 2).slideDown();
+        if ($(".comment-user:hidden").length == 0) {
+            $("#load").fadeOut('slow');
+        }
+        $('html,body').animate({
+            scrollTop: $(this).offset().top
+        }, 1500);
+    });
+});
         </script>
 </body>
 
