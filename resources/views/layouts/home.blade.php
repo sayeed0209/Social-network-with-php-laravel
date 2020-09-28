@@ -108,20 +108,35 @@
                     <div class="comment-add"><a href=""><i class="fas fa-plus-circle"></i></a></div>
                 </div> -->
                 <div class="comment-user">
-                    <div class="comment-profile"><img src="https://www.ecured.cu/images/d/d4/CapitanGarfio.jpg" alt=""></div>
+                    @foreach ($post->comments as $comment)
+                    <div class="comment-profile"><img src="{{asset('image/'. Auth::user()->profile_photo_path)}}" alt=""></div>
                     <div class="container-user-post">
-                        <div class="comment-username">sayeedabu</div>
-                        <div class="comment-post">vale kim no te preoucpes!</div>
+                    <div class="comment-username">{{Auth::user()->name}}</div>
+                    <div class="comment-post">{{$comment->comment}}</div>
                     </div>
+                    @endforeach
                 </div>
                 <div class="comment-insert">
-                    <form action="">
-                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                    @if (Auth::check())
+                    <form action="{{url('/comment')}}" method="POST">
+                        @csrf
+                    <input type="hidden" name="post_id" value="{{$post->id}}">
+                        <textarea name="comment" cols="30" rows="10"></textarea>
                         <input type="submit" value="Comment">
-
                     </form>
                 </div>
+                @if (count($errors) > 0)
+            @foreach ($errors as $error)
+                {{$error}}
+            @endforeach
+                
+            @endif
+            @if (Session::has('success'))
+           {{Session::get('success')}}
+                
+            @endif
             </div>
+            @endif
             @endforeach
         </div>
     
