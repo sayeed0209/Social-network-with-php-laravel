@@ -107,15 +107,17 @@
                     <div class="comment-title">Comments</div>
                     <div class="comment-add"><a href=""><i class="fas fa-plus-circle"></i></a></div>
                 </div> -->
+                @foreach ($post->comments as $comment)
                 <div class="comment-user">
-                    @foreach ($post->comments as $comment)
+                   
                     <div class="comment-profile"><img src="{{asset('image/'. Auth::user()->profile_photo_path)}}" alt=""></div>
                     <div class="container-user-post">
                     <div class="comment-username">{{Auth::user()->name}}</div>
                     <div class="comment-post">{{$comment->comment}}</div>
                     </div>
-                    @endforeach
+                    
                 </div>
+                @endforeach
                 <div class="comment-insert">
                     @if (Auth::check())
                     <form action="{{url('/comment')}}" method="POST">
