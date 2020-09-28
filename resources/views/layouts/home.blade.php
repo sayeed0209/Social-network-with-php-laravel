@@ -108,9 +108,9 @@
                 </div> -->
                 <div class="comment-user">
                     @foreach ($post->comments as $comment)
-                    <div class="comment-profile"><img src="{{asset('image/'. Auth::user()->profile_photo_path)}}" alt=""></div>
+                    <div class="comment-profile"><img src="{{asset('image/'.  $comment->user()->first()->profile_photo_path)}}" alt=""></div>
                     <div class="container-user-post">
-                    <div class="comment-username">{{Auth::user()->name}}</div>
+                    <div class="comment-username">{{ $comment->user()->first()->name}}</div>
                     <div class="comment-post">{{$comment->comment}}</div>
                     </div>
                     @endforeach
