@@ -172,7 +172,8 @@
                                 // console.log($showUsers[i].name)
                                 // console.log($showUsers[i].profile_photo_path)
                                 $('#search-dropdown').append($showUsers[i].name)
-                                $('#search-dropdown').append("<img id='theImg' src='"+ $showUsers[i].profile_photo_path +"'/>");
+                                $('#search-dropdown').append($('<img />')
+                        .attr('src', "" + $showUsers[i].profile_photo_path+ "" ))
                             }
 
                

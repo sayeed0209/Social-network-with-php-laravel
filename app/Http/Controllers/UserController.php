@@ -114,7 +114,9 @@ class UserController extends Controller
     public function search_user(Request $request)
     {
         $data = User::where('name', 'like', '%' . $request->data . '%')->get();
-
+        foreach($data as $user){
+            $user->profile_photo_path = asset('image/' . $user->profile_photo_path);
+        }
         return json_encode($data);
         // return $request;
     }
