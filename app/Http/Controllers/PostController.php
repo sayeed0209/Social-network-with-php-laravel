@@ -136,6 +136,13 @@ class PostController extends Controller
         $post->save();
         return redirect('/profile');
     }
+    public function search_post(Request $request)
+    {
+        $data = Post::where('bio', 'like', '%' . $request->data . '%')->get();
+
+        return json_encode($data);
+        // return $request;
+    }
 
     /**
      * Remove the specified resource from storage.

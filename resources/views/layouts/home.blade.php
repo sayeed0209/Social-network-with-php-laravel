@@ -27,7 +27,8 @@
         <div class="container-home-left">
             <div class="container-left">
                     <input type="text" placeholder="Seach..." name="name" id="search">
-                    <div id="search-dropdown"></div>
+                    <div id="search-dropdown">
+                    <a href="{{ url('profile/')}}" id="link-user"></a></div>
                 <form action="add_friend" method="POST">
                     @csrf
                     <table class="table-friend" id="users">
@@ -147,7 +148,7 @@
                         td.textContent = user.name;
                         create_anchorTag.innerHTML = 'Add Friend <i class="fas fa-user-plus"></i>';
                         td1.appendChild(create_anchorTag)
-                        image_td.innerHTML = '<img src="' + user.profile_photo_path + '" alt="" width="50px" style="border-radius:50%";> ';
+                        image_td.innerHTML = '<img src="' + user.profile_photo_path + '" alt="" width="50px" height="50px" style="border-radius:50%";> ';
 
                         tr.appendChild(image_td)
                         tr.appendChild(td)
@@ -155,7 +156,7 @@
                         document.getElementById('users').appendChild(tr)
                     })
                 })
-                // search
+                // search user
                 document.getElementById('search').addEventListener('change',function(){
                     if(event.target.value[0]=='@'){
                           var inputValue = event.target.value.substring( 1,event.target.value.length);
@@ -171,17 +172,13 @@
                             for(var i = 0; i<$showUsers.length; i++){
                                 // console.log($showUsers[i].name)
                                 // console.log($showUsers[i].profile_photo_path)
-                                $('#search-dropdown').append($showUsers[i].name)
-                                $('#search-dropdown').append($('<img />')
+                                
+                                $('#link-user').append($('<img />')
                         .attr('src', "" + $showUsers[i].profile_photo_path+ "" ))
+                        $('#link-user').append($showUsers[i].name)
                             }
-
-               
                           })}
                 })
-
-
-
             }
 
             $(document).ready(function(){
