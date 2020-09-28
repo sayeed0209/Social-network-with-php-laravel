@@ -28,7 +28,7 @@
             <div class="container-left">
                     <input type="text" placeholder="Seach..." name="name" id="search">
                     <div id="search-dropdown">
-                    <a href="{{ url('profile/')}}" id="link-user"></a></div>
+                    <a href="" id="link-user"></a></div>
                 <form action="add_friend" method="POST">
                     @csrf
                     <table class="table-friend" id="users">
@@ -187,9 +187,8 @@
                             for(var i = 0; i<$showUsers.length; i++){
                                 // console.log($showUsers[i].name)
                                 // console.log($showUsers[i].profile_photo_path)
-                                
                                 $('#link-user').append($('<img />')
-                        .attr('src', "" + $showUsers[i].profile_photo_path+ "" ))
+                        .attr('src', "" + $showUsers[i].profile_photo_path+ "" )).attr('href', 'profile/' + $showUsers[i].name)
                         $('#link-user').append($showUsers[i].name)
                             }
                           })}
