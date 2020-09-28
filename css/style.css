@@ -543,6 +543,53 @@ body header .header .section-header a {
   color: white;
 }
 
+.post-container-update {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.post-container-update .update-post-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding-top: 25px;
+}
+
+.post-container-update .update-post-buttons i {
+  margin-right: 20px;
+  color: gray;
+}
+
+.post-container-update .update-post-buttons input[type=submit] {
+  background-color: #3b5998;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.post-container-update .update-post-buttons input[type=file] {
+  width: 20px;
+  left: 1010px;
+  position: absolute;
+  height: 20px;
+  top: 720px;
+  opacity: 0;
+}
+
 .container {
   width: 100%;
   display: -webkit-box;
@@ -581,6 +628,15 @@ body header .header .section-header a {
   width: 80px;
   height: 80px;
   border-radius: 50%;
+}
+
+.container-left-user .img-profile input {
+  width: 50px;
+  left: 30px;
+  position: absolute;
+  height: 500px;
+  top: 100px;
+  opacity: 0;
 }
 
 .container-left-user .user-profile {

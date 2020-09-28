@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class like extends Model
 {
     use HasFactory;
+    public function user()
+    {
+        return $this->belongsTo('App\models\User');
+    }
+    public function post()
+    {
+        return $this->belongsTo('App\models\Post');
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Auth;
@@ -51,15 +52,17 @@ Route::get('/postUpdate/{id}', [PostController::class, 'edit'])->middleware(['au
 Route::post('/postUpdate/{id}', [PostController::class, 'update']);
 Route::get('/delete/{id}', [PostController::class, 'destroy']);
 // like route
-Route::post('/create_like', [LikeController::class, 'create']);
-Route::post('/create_dislike', [LikeController::class, 'store']);
+// Route::post('/create_like', [LikeController::class, 'create']);
+// Route::post('/create_dislike', [LikeController::class, 'store']);
+Route::post('/like', [LikeController::class, 'index'])->middleware(['auth:sanctum', 'verified']);
 // add friend 
 Route::post('/showuser', [UserController::class, 'show_notYetFriends']);
 // for search user
 Route::post('/search_user', [UserController::class, 'search_user']);
 Route::get('/showFriends', [FriendController::class, 'index']);
 Route::get('/add_friend/{user_id}', [FriendController::class, 'addFriend']);
-
+// comments
+Route::post('/comment',[CommentController::class,'index'])->middleware(['auth:sanctum', 'verified']);
 Route::get('/updateProfile', [UserController::class, 'edit'])->middleware(['auth:sanctum', 'verified']);
 Route::post('/updateProfile', [UserController::class, 'update'])->middleware(['auth:sanctum', 'verified']);
 Route::get('/home', [PostController::class, 'getAllowedPosts'])->middleware(['auth:sanctum', 'verified']);

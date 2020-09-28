@@ -13,8 +13,24 @@ class LikeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $likes = like::all()->where('user_id', '=', Auth::user()->id)->where('post_id', '=', $request->post_id)->first();
+        if ($likes == null) {
+            $createLike = new Like();
+            $createLike->user_id = Auth::user()->id;
+            $createLike->post_id = $request->post_id;
+            $createLike->type = $request->isLike;
+            $createLike->save();
+        } else {
+            $likes->type = $request->isLike;
+            $likes->save();
+        }
+
+        return [
+            'like' => $request->isLike,
+            'post_id' => $request->post_id
+        ];
     }
 
     /**
@@ -24,10 +40,10 @@ class LikeController extends Controller
      */
     public function create(Request $request)
     {
-        $createLike = new Like();
-        $createLike->user_id = Auth::user()->id;
-        $createLike->post_id = $request->post_id;
-        $createLike->save();
+        // $createLike = new Like();
+        // $createLike->user_id = Auth::user()->id;
+        // $createLike->post_id = $request->post_id;
+        // $createLike->save();
     }
 
     /**
@@ -38,11 +54,11 @@ class LikeController extends Controller
      */
     public function store(Request $request)
     {
-        $createDislike = new Like();
-        $createDislike->user_id = Auth::user()->id;
-        $createDislike->post_id = $request->post_id;
-        $createDislike->type = false;
-        $createDislike->save();
+        // $createDislike = new Like();
+        // $createDislike->user_id = Auth::user()->id;
+        // $createDislike->post_id = $request->post_id;
+        // $createDislike->type = false;
+        // $createDislike->save();
     }
 
     /**
