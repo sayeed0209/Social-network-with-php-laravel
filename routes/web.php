@@ -62,7 +62,10 @@ Route::post('/search_user', [UserController::class, 'search_user']);
 Route::get('/showFriends', [FriendController::class, 'index']);
 Route::get('/add_friend/{user_id}', [FriendController::class, 'addFriend']);
 // comments
-Route::post('/comment',[CommentController::class,'index'])->middleware(['auth:sanctum', 'verified']);
+Route::post('/comment', [CommentController::class, 'index'])->middleware(['auth:sanctum', 'verified']);
+// Route::get('/show/{username}',[CommentController::class,'show'])->middleware(['auth:sanctum', 'verified']);
+//search post
+Route::post('/showpost', [PostController::class, 'showpost'])->middleware(['auth:sanctum', 'verified']);
 Route::get('/updateProfile', [UserController::class, 'edit'])->middleware(['auth:sanctum', 'verified']);
 Route::post('/updateProfile', [UserController::class, 'update'])->middleware(['auth:sanctum', 'verified']);
 Route::get('/home', [PostController::class, 'getAllowedPosts'])->middleware(['auth:sanctum', 'verified']);

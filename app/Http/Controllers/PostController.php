@@ -27,8 +27,10 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function showpost(Request $request)
     {
+        $posts = Post::where('body', 'like', '%' . $request->Searchvalue . '%')->get();
+        return $posts;
         
     }
 
@@ -59,7 +61,8 @@ class PostController extends Controller
     }
 
     // funcion todos los post de nuestros amigos y los nuestros.
-    public function getAllowedPosts(){
+    public function getAllowedPosts()
+    {
         $posts = Post::orderBy('created_at', 'DESC')->get();
         $usersInstance = new UserController();
         $friendsInstance = new FriendController();
@@ -67,15 +70,16 @@ class PostController extends Controller
         array_push($ids, Auth::user()->id);
         $users = $usersInstance->getUsersById($ids);
 
-        array_unshift($ids , 0);
+        array_unshift($ids, 0);
         $allowedPosts = [];
         $postOwners = [];
-        $i=[];
-        foreach($posts as $post){
-            if(array_search($post->user_id, $ids) != null){
-                foreach($users as $user){array_push($i, $user->id);
-                    if($user->id == $post->user_id){
-                        
+        $i = [];
+        foreach ($posts as $post) {
+            if (array_search($post->user_id, $ids) != null) {
+                foreach ($users as $user) {
+                    array_push($i, $user->id);
+                    if ($user->id == $post->user_id) {
+
                         // $user->profile_photo_path = asset('image/' . $user->profile_photo_path);
                         array_push($postOwners, $user);
                     }
@@ -85,7 +89,6 @@ class PostController extends Controller
             }
         }
         return view('layouts.home', ['allowedPosts' => $allowedPosts, 'postOwners' => $postOwners]);
-
     }
     /**
      * Display the specified resource.
@@ -149,6 +152,4 @@ class PostController extends Controller
 
         return  $this->index();
     }
-
-    
 }
