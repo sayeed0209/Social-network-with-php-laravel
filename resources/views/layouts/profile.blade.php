@@ -14,6 +14,10 @@
             text-decoration: underline;
             color: blue;
         }
+        .active-red{
+            text-decoration: underline;
+            color: red;
+        }
     </style>
 </head>
 <body class="body-main">
@@ -55,34 +59,26 @@
                     <!-- Sayeed estoy haciendo pruebas jejejejejejej!!! :) -->
                 </div>
                 <div class="likes"  data-postid="{{$post->id}}">
-                    @if (Auth::check())
                     @php
-                     $i = Auth::user()->likes()->count();
-                    echo $post->likes()->count();
-                    $c=1;
+                    //  $i = Auth::user()->likes()->count();
+                    echo '<span>'.$post->likes()->count().'</span>' ;
+                  $likes=$post->likes()->where('user_id','=', Auth::user()->id)->get();
+                    // $c=1;
                     @endphp
-                    @foreach ($post->likes as $like)
-                    @if ($like->post_id == $post->id)
-                    @if ($like->type)
+                    {{-- @foreach ($post->likes as $like) --}}
+                    @if (count($likes)>0)
+
+                    @if ($likes[0]->type)
                         <i class="fas fa-thumbs-up likes-up active">Like</i>
                         <i class="fas fa-thumbs-down likes-up">Dislike</i>
+                        @elseif(!$likes[0]->type)
+                        <i class="fas fa-thumbs-up likes-up">Like</i>
+                        <i class="fas fa-thumbs-down likes-up active-red">Dislike</i>
+                 @endif  
                         @else
                         <i class="fas fa-thumbs-up likes-up">Like</i>
-                        <i class="fas fa-thumbs-down likes-up active">Dislike</i>
-                    @endif   
-                    @break
-                 @elseif($i == $c)
-                 <i class="fas fa-thumbs-up likes-up">Like</i>
-                 <i class="fas fa-thumbs-down likes-up">Dislike</i>
-                    @endif
-                        @php
-                          $c++; 
-                          
-                        @endphp
-                        
-                    @endforeach
-                        
-                    @endif
+                        <i class="fas fa-thumbs-down likes-up ">Dislike</i>
+                    @endif 
                    
                      {{-- <i data-id="{{$post->id}}" class="fas fa-thumbs-up likes-up">Like</i>
                      <i data-id="{{$post->id}}" class="fas fa-thumbs-down likes-up">Dislike</i> --}}
@@ -172,18 +168,28 @@
     // }
     $(document).ready(function(){
         $('.likes-up').click(function(e){
-            var like = e.target.previousElementSibling==null;
+            var like = e.target.nextElementSibling==null;
             var postid=e.target.parentNode.dataset['postid']
             console.log(postid)
             var data = {
-                isLike:like,
+                isLike:!like,
                 post_id:postid
             }
             axios.post('/like',data,{headers:{ 'X-CSRF-TOKEN':document.querySelector('meta[name="csrf-token"]').getAttribute('content')}}).then(res=>{
                 $("i[data-postid='"+res['data']['post_id'] + "']  > .active-likes-up").attr('class','fas fa-thumbs-up likes-up')
-                     e.currentTarget.className='fas fa-thumbs-up likes-up active'
-               
-                console.log(e)
+                    if(e.currentTarget.className == 'fas fa-thumbs-up likes-up'){
+                        e.currentTarget.className='fas fa-thumbs-up likes-up active'
+                        e.currentTarget.parentElement.children[2].className ='fas fa-thumbs-down likes-up';
+
+
+                    }else{
+                        e.currentTarget.parentElement.children[1].className ='fas fa-thumbs-up likes-up';
+                        e.currentTarget.className='fas fa-thumbs-down likes-up active-red'
+                    }
+                    // count
+                     e.currentTarget.parentElement.children[0].textContent = res['data']['likes']
+                    // console.log(res['data']['likes'])
+                // console.log(e)
             })
         })
     })

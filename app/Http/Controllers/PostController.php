@@ -29,7 +29,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -93,9 +93,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getPostById($id)
     {
-        //
+        $post = Post::find($id);
+        return $post;
     }
 
 
