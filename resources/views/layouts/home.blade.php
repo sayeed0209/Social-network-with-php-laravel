@@ -7,7 +7,14 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <script src="{{asset('js/app.js')}}"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <title>Facebook</title>
+    <style>
+        .active{
+            text-decoration: underline;
+            color: blue;
+        }
+    </style>
 </head>
 
 <body class="body-main">
@@ -65,9 +72,39 @@
                     <div class="content-post">
                         {{$post->body}}
                     </div>
-                    <div class="likes">
-                        <a href=""><i  data-id="" class="fas fa-thumbs-up"></i></a>
-                        <a href=""><i data-id="" class="fas fa-thumbs-down"></i></a>
+                    <div class="likes" data-postid="{{$post->id}}">
+                        @if (Auth::check())
+                    @php
+                     $i = Auth::user()->likes()->count();
+                    echo $post->likes()->count();
+                    $c=1;
+                    @endphp
+                    @foreach (Auth::user()->likes as $like)
+                    @if ($like->post_id == $post->id)
+
+                    @if ($like->type)
+                        <i class="fas fa-thumbs-up likes-up active">Like</i>
+                        <i class="fas fa-thumbs-down likes-up">Dislike</i>
+                        @elseif(!$like->type)
+                        <i class="fas fa-thumbs-up likes-up">Like</i>
+                        <i class="fas fa-thumbs-down likes-up active">Dislike</i>
+                        @else
+                        <i class="fas fa-thumbs-up likes-up">Like</i>
+                        <i class="fas fa-thumbs-down likes-up ">Dislike</i>
+                    @endif   
+                    @break
+                 @elseif($i == $c)
+                 <i class="fas fa-thumbs-up likes-up">Like</i>
+                 <i class="fas fa-thumbs-down likes-up">Dislike</i>
+                    @endif
+                        @php
+                          $c++; 
+                          
+                        @endphp
+                        
+                    @endforeach
+                        
+                    @endif
                     </div>
                 </div>
                 <!-- <div class="comment">
@@ -141,6 +178,26 @@
 
 
             }
+
+            $(document).ready(function(){
+        $('.likes-up').click(function(e){
+            var like = e.target.previousElementSibling==null;
+            var postid=e.target.parentNode.dataset['postid']
+            console.log(postid)
+            var data = {
+                isLike:like,
+                post_id:postid
+            }
+            axios.post('/like',data,{headers:{ 'X-CSRF-TOKEN': "{{csrf_token()}}"}}).then(res=>{
+                // console.log(res['data']['like'])
+                $("i[data-postid='"+res['data']['post_id'] + "']  > .active-likes-up").attr('class','fas fa-thumbs-up likes-up')
+                    e.currentTarget.className='fas fa-thumbs-up likes-up active'
+                
+               
+                console.log(e)
+            })
+        })
+    })
         </script>
 </body>
 

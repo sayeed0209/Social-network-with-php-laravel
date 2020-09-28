@@ -61,7 +61,7 @@
                     echo $post->likes()->count();
                     $c=1;
                     @endphp
-                    @foreach (Auth::user()->likes as $like)
+                    @foreach ($post->likes as $like)
                     @if ($like->post_id == $post->id)
                     @if ($like->type)
                         <i class="fas fa-thumbs-up likes-up active">Like</i>
@@ -86,7 +86,7 @@
                    
                      {{-- <i data-id="{{$post->id}}" class="fas fa-thumbs-up likes-up">Like</i>
                      <i data-id="{{$post->id}}" class="fas fa-thumbs-down likes-up">Dislike</i> --}}
-                     <p>like</p>
+        
                 </div>
              </div>
                 <!-- <div class="comment">
@@ -94,20 +94,38 @@
                     <div class="comment-add"><a href=""><i class="fas fa-plus-circle"></i></a></div>
                 </div> -->
                 <div class="comment-user">
-                    <div class="comment-profile"><img src="https://www.ecured.cu/images/d/d4/CapitanGarfio.jpg" alt=""></div>
+                    @foreach ($post->comments as $comment)
+                        
+                    
+                    <div class="comment-profile"><img src="{{asset('image/'. Auth::user()->profile_photo_path)}}" alt=""></div>
                     <div class="container-user-post">
-                    <div class="comment-username">sayeedabu</div>
-                    <div class="comment-post">vale kim no te preoucpes!</div>
+                    <div class="comment-username">{{Auth::user()->name}}</div>
+                    <div class="comment-post">{{$comment->comment}}</div>
                     </div>
+                    @endforeach
                 </div>
-                <div class="comment-insert">
-                    <form action="">
-                        <textarea name="" cols="30" rows="10"></textarea>
+                @if (Auth::check())
+                    <div class="comment-insert">
+                    <form action="{{url('/comment')}}" method="POST">
+                        @csrf
+                    <input type="hidden" name="post_id" value="{{$post->id}}">
+                        <textarea name="comment" cols="30" rows="10"></textarea>
                         <input type="submit" value="Comment">
                     </form>
                 </div>
-                
             </div>
+            @if (count($errors) > 0)
+            @foreach ($errors as $error)
+                {{$error}}
+            @endforeach
+                
+            @endif
+            @if (Session::has('success'))
+           {{Session::get('success')}}
+                
+            @endif
+                @endif
+                
             @endforeach
         </div>
         
@@ -162,13 +180,8 @@
                 post_id:postid
             }
             axios.post('/like',data,{headers:{ 'X-CSRF-TOKEN':document.querySelector('meta[name="csrf-token"]').getAttribute('content')}}).then(res=>{
-                // console.log(res['data']['like'])
-                // $("[data-postid'="+res['data']['post_id'] + "']  > .likes-up").attr('class','fas fa-thumbs-up likes-up')
-                if(res){
+                $("i[data-postid='"+res['data']['post_id'] + "']  > .active-likes-up").attr('class','fas fa-thumbs-up likes-up')
                      e.currentTarget.className='fas fa-thumbs-up likes-up active'
-                }else{
-                    e.currentTarget.className='fas fa-thumbs-up likes-up one-active'
-                }
                
                 console.log(e)
             })
