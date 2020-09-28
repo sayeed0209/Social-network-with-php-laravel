@@ -390,7 +390,7 @@ body header .header .section-header a {
 .container-right-profile .container-post .comment-user {
   margin: 8px 0px 8px 0px;
   margin-left: 10px;
-  display: none;
+  display: flex;
   flex-direction: row;
 }
 
