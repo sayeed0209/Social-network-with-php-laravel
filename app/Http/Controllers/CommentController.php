@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ class CommentController extends Controller
         ]);
         $comment = new Comment();
         $comment->comment = $request->comment;
-        $comment->user_id= Auth::user()->id;
+        $comment->user_id = Auth::user()->id;
         $comment->post_id = $request->post_id;
         $comment->save();
         Session::flash('success', 'Your comment was successfully added');
@@ -55,12 +56,12 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+
      */
     public function show($id)
     {
-        //
+        
+        
     }
 
     /**

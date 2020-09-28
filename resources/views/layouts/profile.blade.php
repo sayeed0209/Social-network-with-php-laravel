@@ -91,11 +91,10 @@
                 </div> -->
                 <div class="comment-user">
                     @foreach ($post->comments as $comment)
-                        
-                    
-                    <div class="comment-profile"><img src="{{asset('image/'. Auth::user()->profile_photo_path)}}" alt=""></div>
+
+                    <div class="comment-profile"><img src="{{asset('image/'. $comment->user()->first()->profile_photo_path)}}" alt=""></div>
                     <div class="container-user-post">
-                    <div class="comment-username">{{Auth::user()->name}}</div>
+                    <div class="comment-username">{{$comment->user()->first()->name}}</div>
                     <div class="comment-post">{{$comment->comment}}</div>
                     </div>
                     @endforeach
@@ -129,43 +128,7 @@
 
 
 <script>
-    
-    // window.onload = function(){
-    //     document.querySelectorAll('.fa-thumbs-up').forEach(function(like){
-    //         like.onclick=(function(){
-    //     var currentTarget = event.currentTarget
-    //     var post_id=currentTarget.getAttribute('data-id')
-    //     currentTarget.style.color='blue';
-    //     axios.post('{{url("create_like")}}',
-    //     {'post_id':post_id},
-    //     {
-    //         headers:{
-    //             'X-CSRF-TOKEN':document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-    //         }
-    //     }).then(function(res){
-    //        console.log(res)
-    //     })
-    //   })
-    // })
-    
-    // document.querySelectorAll('.fa-thumbs-down').forEach(function(like){
-    //         like.onclick=(function(){
-    //     var currentTarget = event.currentTarget
-    //     currentTarget.style.color='red';
-    //     var post_id=currentTarget.getAttribute('data-id')
-    //     axios.post('{{url("create_dislike")}}',
-    //     {'post_id':post_id},
-    //     {
-    //         headers:{
-    //             'X-CSRF-TOKEN':document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-    //         }
-    //     }).then(function(res){
-    //     //    console.log(res)
-    //     })
-    //   })
-    // })
-    
-    // }
+
     $(document).ready(function(){
         $('.likes-up').click(function(e){
             var like = e.target.nextElementSibling==null;
