@@ -1,4 +1,8 @@
-
+.container-search-post{
+    background-color: white;
+    position: relative;
+    border-radius: 5px;
+}
 
 #search-dropdown{
     display: flex;
@@ -51,7 +55,7 @@
                 margin-bottom: 5px;
                 border: 1px solid gray;
                 border-radius: 5px;
-                width: 99.5%;
+                width: 88%;
                 height: 50px;
             }
         }

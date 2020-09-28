@@ -28,7 +28,8 @@
             <div class="container-left">
                     <input type="text" placeholder="Seach..." name="name" id="search">
                     <div id="search-dropdown">
-                    <a href="" id="link-user"></a></div>
+                    <a href="" id="link-user"></a>
+                    </div>
                 <form action="add_friend" method="POST">
                     @csrf
                     <table class="table-friend" id="users">
@@ -141,7 +142,7 @@
             @endif
             @endforeach
         </div>
-    
+
  
         <script>
             window.onload = function() {
@@ -185,7 +186,7 @@
                           ).then(function(res){
                             // console.log(res.data)
                             $showUsers = res.data
-                        
+                            $('#link-user').empty();
                             for(var i = 0; i<$showUsers.length; i++){
                                 // console.log($showUsers[i].name)
                                 // console.log($showUsers[i].profile_photo_path)
