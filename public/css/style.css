@@ -134,6 +134,31 @@ body header .header .section-header a {
   color: white;
 }
 
+#search-dropdown {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#search-dropdown #link-user {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  margin-left: 10px;
+  text-decoration: none;
+  color: black;
+  padding: 10px 0px 10px 0px;
+  font-size: 15px;
+}
+
+#search-dropdown #link-user img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
 .comment-wall {
   border-radius: 5px;
   padding: 10px 0px 15px 0px;
@@ -365,7 +390,7 @@ body header .header .section-header a {
 .container-right-profile .container-post .comment-user {
   margin: 8px 0px 8px 0px;
   margin-left: 10px;
-  display: flex;
+  display: none;
   flex-direction: row;
 }
 

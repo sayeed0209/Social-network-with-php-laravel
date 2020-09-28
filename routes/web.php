@@ -59,6 +59,8 @@ Route::post('/like', [LikeController::class, 'index'])->middleware(['auth:sanctu
 Route::post('/showuser', [UserController::class, 'show_notYetFriends']);
 // for search user
 Route::post('/search_user', [UserController::class, 'search_user']);
+Route::post('/search_post', [PostController::class, 'search_post']);
+
 Route::get('/showFriends', [FriendController::class, 'index']);
 Route::get('/add_friend/{user_id}', [FriendController::class, 'addFriend']);
 // comments

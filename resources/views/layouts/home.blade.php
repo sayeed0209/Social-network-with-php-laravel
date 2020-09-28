@@ -27,7 +27,8 @@
         <div class="container-home-left">
             <div class="container-left">
                     <input type="text" placeholder="Seach..." name="name" id="search">
-                    <div id="search-dropdown"></div>
+                    <div id="search-dropdown">
+                    <a href="" id="link-user"></a></div>
                 <form action="add_friend" method="POST">
                     @csrf
                     <table class="table-friend" id="users">
@@ -106,15 +107,18 @@
                     <div class="comment-title">Comments</div>
                     <div class="comment-add"><a href=""><i class="fas fa-plus-circle"></i></a></div>
                 </div> -->
+                @foreach ($post->comments as $comment)
                 <div class="comment-user">
-                    @foreach ($post->comments as $comment)
-                    <div class="comment-profile"><img src="{{asset('image/'.  $comment->user()->first()->profile_photo_path)}}" alt=""></div>
+                   
+                    <div class="comment-profile"><img src="{{asset('image/'. $comment->user()->first()->profile_photo_path)}}" alt=""></div>
                     <div class="container-user-post">
-                    <div class="comment-username">{{ $comment->user()->first()->name}}</div>
+                    <div class="comment-username">{{$comment->user()->first()->name}}</div>
                     <div class="comment-post">{{$comment->comment}}</div>
                     </div>
-                    @endforeach
+                    
                 </div>
+                @endforeach
+                <a href="" id="loadMore">Load More</a>
                 <div class="comment-insert">
                     @if (Auth::check())
                     <form action="{{url('/comment')}}" method="POST">
@@ -162,7 +166,7 @@
                         td.textContent = user.name;
                         create_anchorTag.innerHTML = 'Add Friend <i class="fas fa-user-plus"></i>';
                         td1.appendChild(create_anchorTag)
-                        image_td.innerHTML = '<img src="' + user.profile_photo_path + '" alt="" width="50px" style="border-radius:50%";> ';
+                        image_td.innerHTML = '<img src="' + user.profile_photo_path + '" alt="" width="50px" height="50px" style="border-radius:50%";> ';
 
                         tr.appendChild(image_td)
                         tr.appendChild(td)
@@ -170,7 +174,7 @@
                         document.getElementById('users').appendChild(tr)
                     })
                 })
-                // search
+                // search user
                 document.getElementById('search').addEventListener('change',function(){
                     if(event.target.value[0]=='@'){
                           var inputValue = event.target.value.substring( 1,event.target.value.length);
@@ -186,18 +190,12 @@
                             for(var i = 0; i<$showUsers.length; i++){
                                 // console.log($showUsers[i].name)
                                 // console.log($showUsers[i].profile_photo_path)
-                                
-                                $('#search-dropdown').append($('<img />')
-                        .attr('src', "" + $showUsers[i].profile_photo_path+ "" ).css({width:'50px',borderRadius:'50%'}))
-                        $('#search-dropdown').append($('<span>').append($showUsers[i].name))
+                                $('#link-user').append($('<img />')
+                        .attr('src', "" + $showUsers[i].profile_photo_path+ "" )).attr('href', 'profile/' + $showUsers[i].name)
+                        $('#link-user').append($showUsers[i].name)
                             }
-
-               
                           })}
                 })
-
-
-
             }
 
             $(document).ready(function(){
@@ -233,6 +231,20 @@
 
 
     })
+
+    $(function () {
+    $(".comment-user").slice(0, 2).show();
+    $("#loadMore").on('click', function (e) {
+        e.preventDefault();
+        $(".comment-user:hidden").slice(0, 2).slideDown();
+        if ($(".comment-user:hidden").length == 0) {
+            $("#load").fadeOut('slow');
+        }
+        $('html,body').animate({
+            scrollTop: $(this).offset().top
+        }, 1500);
+    });
+});
         </script>
 </body>
 
