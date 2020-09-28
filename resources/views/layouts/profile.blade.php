@@ -26,11 +26,11 @@
     <div class="container-left-profile">
         <div class="container-left-user">
         <div class="img-profile">
-        <img src="{{asset('image/'. Auth::user()->profile_photo_path)}}" alt="">
+        <img src="{{asset('image/'. $user->profile_photo_path)}}" alt="">
         </div>
         <div class="user-profile">
-            <div class="user-name">{{Auth::user()->name}} <a href="{{ url('/updateProfile')}}"><i class="fas fa-pen"></i></a></div>
-            <div class="bio-profile">{{Auth::user()->bio}}</div>
+            <div class="user-name">{{$user->name}} <a href="{{ url('/updateProfile')}}"><i class="fas fa-pen"></i></a></div>
+            <div class="bio-profile">{{$user->bio}}</div>
             <!-- <div class="update-profile-icon"><i class="fas fa-pen"></i></div> -->
         </div>
         </div>
@@ -41,8 +41,8 @@
         <div class="container-post">
                 <div class="user-post">
                     <div class="header-user">
-                <img src="{{asset('image/'. Auth::user()->profile_photo_path)}}" alt="">
-                    <p>{{Auth::user()->name}}</p>
+                <img src="{{asset('image/'. $user->profile_photo_path)}}" alt="">
+                    <p>{{$user->name}}</p>
                     </div>
                     <div class="icons-post">
                 <a href="{{url('/postUpdate/'.$post->id) }}"><i class="fas fa-pen"></i></a>    

@@ -63,7 +63,7 @@
             <div class="container-post">
                 <div class="user-post">
                     <div class="header-user">
-                        <img src="{{$postOwners[$key]->profile_photo_path}}" alt="">
+                    <a href="{{ url('/profile/' . $postOwners[$key]->name)}}"><img src="{{$postOwners[$key]->profile_photo_path}}" alt=""></a>
                         <p>{{$postOwners[$key]->name}}</p>
                     </div>
                     <div class="icons-post">

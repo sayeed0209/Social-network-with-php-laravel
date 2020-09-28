@@ -19,7 +19,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('layouts.profile')->withPosts($posts);
+        return view('layouts.profiles')->withPosts($posts);
     }
 
     /**
@@ -102,9 +102,9 @@ class PostController extends Controller
 
     public function getByUsername($username)
     {
-        $userid = User::where('name', $username)->get()->first()->id;
-        $userposts = Post::where('user_id', $userid)->get();
-        return view('layouts.profile')->withPosts($userposts);
+        $user = User::where('name', $username)->get()->first();
+        $userposts = Post::where('user_id', $user->id)->get();
+        return view('layouts.profile')->withPosts($userposts)->with('user', $user);
     }
     /**
      * Show the form for editing the specified resource.
