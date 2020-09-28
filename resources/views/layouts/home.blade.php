@@ -23,6 +23,7 @@
         <div class="container-home-left">
             <div class="container-left">
                     <input type="text" placeholder="Seach..." name="name" id="search">
+                    <div id="search-dropdown"></div>
                 <form action="add_friend" method="POST">
                     @csrf
                     <table class="table-friend" id="users">
@@ -161,7 +162,7 @@
                     })
                 })
                 // search
-                document.getElementById('search').addEventListener('keydown',function(){
+                document.getElementById('search').addEventListener('change',function(){
                     if(event.target.value[0]=='@'){
                           var inputValue = event.target.value.substring( 1,event.target.value.length);
                           console.log(inputValue)
@@ -171,7 +172,17 @@
                           {headers:{'X-CSRF-TOKEN': "{{csrf_token()}}"}
                             } 
                           ).then(function(res){
-                            //   console.log(res.data)
+                            // console.log(res.data)
+                            $showUsers = res.data
+                        
+                            for(var i = 0; i<$showUsers.length; i++){
+                                // console.log($showUsers[i].name)
+                                // console.log($showUsers[i].profile_photo_path)
+                                $('#search-dropdown').append($showUsers[i].name)
+                                $('#search-dropdown').append("<img id='theImg' src='"+ $showUsers[i].profile_photo_path +"'/>");
+                            }
+
+               
                           })}
                 })
 
