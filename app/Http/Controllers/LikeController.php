@@ -16,6 +16,8 @@ class LikeController extends Controller
     public function index(Request $request)
     {
         $likes = like::all()->where('user_id', '=', Auth::user()->id)->where('post_id', '=', $request->post_id)->first();
+        $postInstance = new PostController();
+        // $likesCount = $postInstance->getPostById($request->post_id)->likes()->count();
         if ($likes == null) {
             $createLike = new Like();
             $createLike->user_id = Auth::user()->id;
@@ -26,8 +28,9 @@ class LikeController extends Controller
             $likes->type = $request->isLike;
             $likes->save();
         }
-
+        $likesCount = $postInstance->getPostById($request->post_id)->likes()->count();
         return [
+            'likes' => $likesCount,
             'like' => $request->isLike,
             'post_id' => $request->post_id
         ];
