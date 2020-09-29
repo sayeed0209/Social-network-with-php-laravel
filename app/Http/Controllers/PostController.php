@@ -19,7 +19,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('layouts.profiles')->withPosts($posts);
+        return view('layouts.profile')->withPosts($posts);
     }
 
     /**
@@ -163,6 +163,6 @@ class PostController extends Controller
     {
         Post::where('id', $id)->delete();
 
-        return  $this->index();
+        return  redirect()->back();
     }
 }

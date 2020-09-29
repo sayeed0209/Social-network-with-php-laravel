@@ -26,18 +26,20 @@
     $(document).ready(function(){
         $('#search-post').change(function(e){
             var inputValue = $(this).val()
+
             console.log(inputValue)
             axios.post('/showpost',{'Searchvalue': inputValue},{headers:{'X-CSRF-TOKEN': "{{csrf_token()}}"}}).then(function(res){
                 console.log(res.data)
-                $showPosts = res.data
-                            $('#link-posts-search').empty();
-
-                        for(var i = 0; i<$showPosts.length; i++){
-                                console.log($showPosts[i].body)
-                                // console.log($showUsers[i].profile_photo_path)
-                               
-                        $('#link-posts-search').append($showPosts[i].body).attr('href', 'postSearch/' + $showPosts[i].id).attr('href', 'post/' + $showPosts[i].id)
-                            }
+                var post = res.data
+                $('#link-posts-search').empty();
+                for(var i = 0; i<post.length; i++){
+                    var userId = post[i].user_id;
+                    var userBody = post[i].body;
+                    // console.log(userId, userBody);
+                    $('.container-search-post').append($('<a>').append(userBody).append('<br>').attr('href', 'post/' + userId))
+                    
+                }
+                
 
 
             })

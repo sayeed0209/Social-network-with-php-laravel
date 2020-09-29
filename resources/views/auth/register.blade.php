@@ -1,7 +1,8 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            {{-- <x-jet-authentication-card-logo /> --}}
+            <img src="https://tiendaqg.com/wp-content/uploads/2019/03/facebook-3-logo-png-transparent-300x300.png" class="w-32">
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
@@ -34,7 +35,7 @@
                     {{ __('Already registered?') }}
                 </a>
 
-                <x-jet-button class="ml-4">
+                <x-jet-button class="ml-4 bg-blue-500">
                     {{ __('Register') }}
                 </x-jet-button>
             </div>
