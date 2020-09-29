@@ -26,6 +26,7 @@
             console.log(inputValue)
             axios.post('/showpost',{'Searchvalue': inputValue},{headers:{'X-CSRF-TOKEN': "{{csrf_token()}}"}}).then(function(res){
                 console.log(res.data)
+                
 
 
             })

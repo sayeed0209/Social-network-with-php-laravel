@@ -14,7 +14,7 @@
     <div class="container-left-profile">
         <div class="container-left-user">
         <div class="img-profile">
-        <img src="https://dureeandcompany.com/wp-content/uploads/2018/09/BLOG-1-Kim-Kardashian.jpg" alt="">
+        <img src="{{asset('image/'. Auth::user()->profile_photo_path)}}" alt="">
         </div>
         <div class="user-profile">
             <div class="user-name">{{Auth::user()->name}}</div>
@@ -27,13 +27,14 @@
         <div class="container-post">
                 <div class="user-post">
                     <div class="header-user">
-                <img src="https://dureeandcompany.com/wp-content/uploads/2018/09/BLOG-1-Kim-Kardashian.jpg" alt="">
-                    <p>kimkardashian</p>
+                <img src="{{asset('image/'. Auth::user()->profile_photo_path)}}" alt="">
+                    <p>{{Auth::user()->name}}</p>
                     </div>
                     <div class="icons-post">
                 </div>
                 </div>
                 <form action="" method="POST">
+                    @csrf
                 <div class="img-post">
                     <img src="{{asset('image/'. $post->image)}}" alt="">
                 </div>
