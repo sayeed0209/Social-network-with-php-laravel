@@ -41,4 +41,4 @@ php artisan serv
 ## Usage
 
 To navigate throught the project, interact with it as a usual social network. You can sign up and you can start to interact with your friends.
-In our social network you can create, update and delete posts also you can edit your profile image and description, add friends, search posts and friends.
+In our social network you can create, update and delete posts also you can edit your profile image and description, add friends, search posts and friends.# Social-network-with-php-laravel
